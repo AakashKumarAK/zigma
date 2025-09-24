@@ -3,7 +3,6 @@
 import * as React from "react"
 import Image from "next/image"
 import Autoplay from "embla-carousel-autoplay"
-import { motion } from "framer-motion"
 import {
   Carousel,
   CarouselContent,
@@ -67,14 +66,8 @@ export default function HomePage() {
         <CarouselContent className="h-full min-h-screen">
           {slides.map((slide, idx) => (
             <CarouselItem key={idx} className="relative w-full h-screen">
-              {/* ✅ Motion Zoom Effect per slide */}
-              <motion.div
-                key={idx} // re-triggers animation each slide
-                initial={{ scale: 1.1 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 5, ease: "easeOut" }}
-                className="absolute inset-0"
-              >
+              {/* ✅ Background Image */}
+              <div className="absolute inset-0">
                 <Image
                   src={slide.image}
                   alt={slide.title}
@@ -82,28 +75,22 @@ export default function HomePage() {
                   className="object-cover"
                   priority={idx === 0}
                 />
-              </motion.div>
+              </div>
 
               {/* ✅ Animated Content */}
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 bg-black/30">
-                <motion.h1
-                  key={slide.title}
-                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="text-4xl md:text-6xl font-bold mb-2 drop-shadow-lg"
+                <h1
+                  className="text-4xl md:text-6xl font-bold mb-2 drop-shadow-lg 
+                             animate-slide-up"
                 >
                   {slide.title}
-                </motion.h1>
-                <motion.p
-                  key={slide.subtitle}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-                  className="text-lg md:text-2xl drop-shadow"
+                </h1>
+                <p
+                  className="text-lg md:text-2xl drop-shadow 
+                             animate-slide-up-delay"
                 >
                   {slide.subtitle}
-                </motion.p>
+                </p>
               </div>
             </CarouselItem>
           ))}
