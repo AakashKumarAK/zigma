@@ -63,7 +63,7 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 w-full h-24 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-transparent shadow-md" : "bg-[#6D7175] shadow-md"
+        scrolled ? "bg-zinc-400 opacity-60 backdrop-blur-md shadow-md" : "bg-[#6D7175] shadow-md"
       }`}
     >
       <div className="flex w-full items-center justify-between px-4 py-3">
