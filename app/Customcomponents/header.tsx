@@ -27,7 +27,7 @@ export default function Header() {
   const mediaTimeout = useRef<NodeJS.Timeout | null>(null);
 
   // helper function to check active route
-  const isActive = (path: any) =>
+  const isActive = (path: string) =>
     pathname === path ? "underline underline-offset-8 font-semibold" : "";
 
   useEffect(() => {
@@ -43,16 +43,22 @@ export default function Header() {
   }, []);
 
   // generic handlers for hover menus
-  const handleEnter = (setter: any, timeoutRef: any) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setter(true);
-  };
+  const handleEnter = (
+  setter: React.Dispatch<React.SetStateAction<boolean>>,
+  timeoutRef: React.RefObject<NodeJS.Timeout | null>
+) => {
+  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  setter(true);
+};
 
-  const handleLeave = (setter: any, timeoutRef: any) => {
-    timeoutRef.current = setTimeout(() => {
-      setter(false);
-    }, 200); // delay before closing
-  };
+ const handleLeave = (
+  setter: React.Dispatch<React.SetStateAction<boolean>>,
+  timeoutRef: React.RefObject<NodeJS.Timeout | null>
+) => {
+  timeoutRef.current = setTimeout(() => {
+    setter(false);
+  }, 200); // delay before closing
+};
 
   return (
     <header
